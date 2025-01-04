@@ -1,4 +1,4 @@
-//board
+
 let tileSize = 32;
 let rows = 16;
 let columns = 16;
@@ -8,7 +8,7 @@ let boardWidth = tileSize * columns; // 32 * 16
 let boardHeight = tileSize * rows; // 32 * 16
 let context;
 
-//ship
+
 let shipWidth = tileSize*2;
 let shipHeight = tileSize;
 let shipX = tileSize * columns/2 - tileSize;
@@ -24,7 +24,7 @@ let ship = {
 let shipImg;
 let shipVelocityX = tileSize; //ship moving speed
 
-//aliens
+
 let alienArray = [];
 let alienWidth = tileSize*2;
 let alienHeight = tileSize;
@@ -37,7 +37,7 @@ let alienColumns = 3;
 let alienCount = 0; //number of aliens to defeat
 let alienVelocityX = 1; //alien moving speed
 
-//bullets
+
 let bulletArray = [];
 let bulletVelocityY = -10; //bullet moving speed
 
@@ -54,7 +54,7 @@ window.onload = function() {
     // context.fillStyle="green";
     // context.fillRect(ship.x, ship.y, ship.width, ship.height);
 
-    //load images
+  
     shipImg = new Image();
     shipImg.src = "./ship.png";
     shipImg.onload = function() {
@@ -79,10 +79,10 @@ function update() {
 
     context.clearRect(0, 0, board.width, board.height);
 
-    //ship
+   
     context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
 
-    //alien
+    
     for (let i = 0; i < alienArray.length; i++) {
         let alien = alienArray[i];
         if (alien.alive) {
@@ -106,7 +106,7 @@ function update() {
         }
     }
 
-    //bullets
+  
     for (let i = 0; i < bulletArray.length; i++) {
         let bullet = bulletArray[i];
         bullet.y += bulletVelocityY;
@@ -125,12 +125,11 @@ function update() {
         }
     }
 
-    //clear bullets
     while (bulletArray.length > 0 && (bulletArray[0].used || bulletArray[0].y < 0)) {
         bulletArray.shift(); //removes the first element of the array
     }
 
-    //next level
+
     if (alienCount == 0) {
         //increase the number of aliens in columns and rows by 1
         score += alienColumns * alienRows * 100; //bonus points :)
@@ -147,7 +146,6 @@ function update() {
         createAliens();
     }
 
-    //score
     context.fillStyle="white";
     context.font="16px courier";
     context.fillText(score, 5, 20);
